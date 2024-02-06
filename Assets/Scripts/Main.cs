@@ -23,8 +23,6 @@ public class Main : MonoBehaviour
         _transaction.SetActive(true);
     }
 
-
-
     public void Unimplemented()
     {
         _popup.SetActive(true);
