@@ -21,51 +21,34 @@ public class InputData
 
 public class CreatAccoount : MonoBehaviour
 {
-    List<InputData> inputDataList = new List<InputData>();
+    protected List<InputData> inputDataList = new List<InputData>();
     public InputData inputData;
 
     public GameObject _createAccount;
     public GameObject _login;
     public GameObject _errorPanel;
 
-
-    public void InputInformation()      //정보 처리를 위해 임시 저장
-    {
-        PlayerPrefs.SetString("ID" + inputDataList.Count, inputData.inputID.text);
-        PlayerPrefs.SetString("Name" + inputDataList.Count, inputData.inputName.text);
-        PlayerPrefs.SetString("PW" + inputDataList.Count, inputData.inputPW.text);
-        PlayerPrefs.SetString("Account" + inputDataList.Count, inputData.inputAccount.text);
-        PlayerPrefs.SetString("Phone" + inputDataList.Count, inputData.inputPhone.text);
-        PlayerPrefs.SetString("E_Mail" + inputDataList.Count, inputData.inputEMail.text);
-    }
-
-    public void InformationSave()       //리스트에 입력받은 정보 저장
-    {
-        inputDataList.Add(inputData);
-    }
-
-
     public void FinishButton()      //finish 버튼 눌렀을 때 실행
     {
         InputInformation();
 
-        for (int i = 0; i< inputDataList.Count; i++)        //리스트에 있는 정보와 비교하여
+        for (int i = 0; i < inputDataList.Count; i++)        //리스트에 있는 정보와 비교하여
         {
-            if(inputData.inputID == inputDataList[i].inputID)       //임시 정보의 ID와 리스트의 ID가 같은 경우
+            if (inputData.inputID.text == inputDataList[i].inputID.text)       //임시 정보의 ID와 리스트의 ID가 같은 경우
             {
                 _errorPanel.SetActive(true);        //에러 panel active true
             }
         }
 
-        if(inputData.inputPW.text != inputData.inputPWConfirm.text)     //임시 정보의 PW 와 PWConfirm 같지 않을 경우
+        if (inputData.inputPW.text != inputData.inputPWConfirm.text)     //임시 정보의 PW 와 PWConfirm 같지 않을 경우
         {
             _errorPanel.SetActive(true);        //에러 panel active true
         }
 
-        if(inputData.inputID.text.Length < 3 || inputData.inputID.text.Length > 10)     //ID 3~10글자 제한
+        if (inputData.inputID.text.Length < 3 || inputData.inputID.text.Length > 10)     //ID 3~10글자 제한
             _errorPanel.SetActive(true);        //에러 panel active true
 
-        if(inputData.inputPW.text.Length < 5 || inputData.inputPW.text.Length > 15)     //PW 5~15글자 제한
+        if (inputData.inputPW.text.Length < 5 || inputData.inputPW.text.Length > 15)     //PW 5~15글자 제한
             _errorPanel.SetActive(true);        //에러 panel active true
 
 
@@ -76,7 +59,30 @@ public class CreatAccoount : MonoBehaviour
             _createAccount.SetActive(false);
             _login.SetActive(true);
         }
-            
+
+    }
+
+    public void InputInformation()      //정보 처리를 위해 임시 저장
+    {
+        PlayerPrefs.SetString("ID", inputData.inputID.text);
+        PlayerPrefs.SetString("Name", inputData.inputName.text);
+        PlayerPrefs.SetString("PW", inputData.inputPW.text);
+        PlayerPrefs.SetString("Account", inputData.inputAccount.text);
+        PlayerPrefs.SetString("Phone", inputData.inputPhone.text);
+        PlayerPrefs.SetString("E_Mail", inputData.inputEMail.text);
+    }
+
+    public void InformationSave()       //리스트에 입력받은 정보 저장
+    {
+        inputDataList.Add(inputData);
+
+        PlayerPrefs.SetString("ID" + inputDataList.Count, inputData.inputID.text);
+        PlayerPrefs.SetString("Name" + inputDataList.Count, inputData.inputName.text);
+        PlayerPrefs.SetString("PW" + inputDataList.Count, inputData.inputPW.text);
+        PlayerPrefs.SetString("Account" + inputDataList.Count, inputData.inputAccount.text);
+        PlayerPrefs.SetString("Phone" + inputDataList.Count, inputData.inputPhone.text);
+        PlayerPrefs.SetString("E_Mail" + inputDataList.Count, inputData.inputEMail.text);
+
     }
 
     public void PanelRetryButton()      //panel 끄는 버튼
