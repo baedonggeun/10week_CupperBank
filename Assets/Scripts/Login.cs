@@ -11,10 +11,9 @@ public class Login : MonoBehaviour
     public GameObject _createAccount;
     public GameObject _popupButton;
     public GameObject _loginErrorPanel;
-    
 
-    [SerializeField] private InputField inputLoginID;
-    [SerializeField] private InputField inputLoginPW;
+    [SerializeField] protected InputField inputLoginID;
+    [SerializeField] protected InputField inputLoginPW;
 
 
     public void LoginButton()       //로그인 버튼 클릭 시

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Windows;
@@ -13,6 +14,8 @@ public class InputData
     public string inputAccount;     //CupperBank 계좌
     public string inputPhone;       //핸드폰 번호
     public string inputEMail;       //Email 주소
+    public string accountBalance = "0";     //계좌 생성 시, 금액
+    public string Holdings = "100000";      //계좌 생성 시, 가지고 있는 금액
 }
 
 public class CreatAccoount : MonoBehaviour

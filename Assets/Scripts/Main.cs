@@ -41,6 +41,12 @@ public class Main : MonoBehaviour
         transfer = true;
     }
 
+    public void AccountInquiryButton()
+    {
+        _main.SetActive(false);
+        _accountInquiry.SetActive(true);
+    }
+
     public void Unimplemented()
     {
         _popup.SetActive(true);
