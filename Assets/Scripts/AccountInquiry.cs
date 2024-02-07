@@ -27,17 +27,26 @@ public class AccountInquiry : Login
     public TextMeshProUGUI accountBalanceText;
     public TextMeshProUGUI holdingsText;
 
-
-    AccountData accountData;
+    AccountData accountData = new AccountData();
 
     string keyID;
     string details;
+
+    private void Start()
+    {
+        if(_accountInquiry.activeSelf == true)
+            OverwriteData();
+    }
+
+
     public void OverwriteData()
     {
         keyID = base.inputLoginID.text + "_ID";
-        PlayerPrefs.SetString(keyID, details);      //details에 keyID를 키로 갖는 값을 덮어씀
-        JsonUtility.FromJsonOverwrite(details, accountData);        //details Json으로 accountData 클래스 덮어씀
+        details = PlayerPrefs.GetString(keyID);      //details에 keyID를 키로 갖는 값을 덮어씀
+        accountData = JsonUtility.FromJson<AccountData>(details);       //details의 json을 accountData 오브젝트로 전환
+        //JsonUtility.FromJsonOverwrite(details, accountData);        //details Json으로 accountData 클래스 덮어씀
 
+        //accountData의 값들을 text에 넣어 디스플레이
         nameText.text = accountData.Name;
         idText.text = inputLoginID.text;
         accountText.text = accountData.Account;

@@ -10,10 +10,10 @@ using UnityEngine.Windows;
 [System.Serializable]
 public class InputData
 {
-    public string inputName;        //이름
-    public string inputAccount;     //CupperBank 계좌
-    public string inputPhone;       //핸드폰 번호
-    public string inputEMail;       //Email 주소
+    public string Name;        //이름
+    public string Account;     //CupperBank 계좌
+    public string Phone;       //핸드폰 번호
+    public string EMail;       //Email 주소
     public string accountBalance = "0";     //계좌 생성 시, 금액
     public string Holdings = "100000";      //계좌 생성 시, 가지고 있는 금액
 }
@@ -66,15 +66,16 @@ public class CreatAccoount : MonoBehaviour
 
     public void InputInformation()      //효율적인 정보 처리를 위해 입력 받은 값을 json으로 저장
     {
-        inputData.inputName = inputName.text;
-        inputData.inputAccount = inputAccount.text;
-        inputData.inputPhone = inputPhone.text;
-        inputData.inputEMail = inputEmail.text;
+        //inputData 값을 입력받은 값으로 초기화
+        inputData.Name = inputName.text;
+        inputData.Account = inputAccount.text;
+        inputData.Phone = inputPhone.text;
+        inputData.EMail = inputEmail.text;
 
-        string json = JsonUtility.ToJson(inputData);
+        string json = JsonUtility.ToJson(inputData);        //json 포맷으로 직렬화
 
-        PlayerPrefs.SetString(inputID.text + "_ID", json);
-        PlayerPrefs.SetString(inputID.text + "_PW", inputPW.text);
+        PlayerPrefs.SetString(inputID.text + "_ID", json);      //입력 아이디_ID를 키로 json 포맷으로 직렬화된 문자열을 값으로 저장
+        PlayerPrefs.SetString(inputID.text + "_PW", inputPW.text);      //입력 아이디_PW를 키로 입력 비밀번호를 값으로 저장
 
     }
 
