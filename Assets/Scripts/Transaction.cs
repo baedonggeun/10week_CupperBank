@@ -2,38 +2,38 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Transaction : MonoBehaviour
+public class Transaction : Main
 {
-    public GameObject _transaction;
-    public GameObject _main;
-    public GameObject _EnterInformation;
-
+    
+    public GameObject _enterInformation;
     public GameObject _id;
     public GameObject _account;
     public GameObject _phoneNumber;
-    public GameObject _popup;
+    public GameObject _transactionpopup;
 
 
     public void BeforeButton()
     {
         _main.SetActive(true);
         _transaction.SetActive(false);
+
+        BooleanInitialize();
     }
 
     public void IDButton()
     {
-        _EnterInformation.SetActive(true);
+        _enterInformation.SetActive(true);
         _transaction.SetActive(false);
     }
 
-    public void Unimplemented()
+    public void TransactionUnimplemented()
     {
-        _popup.SetActive(true);
+        _transactionpopup.SetActive(true);
     }
 
-    public void PopupButton()
+    public void TransactionPopupButton()
     {
-        _popup.SetActive(false);
+        _transactionpopup.SetActive(false);
     }
 
 

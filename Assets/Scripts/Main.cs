@@ -17,10 +17,28 @@ public class Main : MonoBehaviour
     public GameObject _foreignCurrencyExchange;
     public GameObject _popup;
 
-    public void TransactionButton()
+    protected bool deposit = false;
+    protected bool withdrawal = false;
+    protected bool transfer = false;
+
+    public void DepositButton()
     {
         _main.SetActive(false);
         _transaction.SetActive(true);
+        deposit = true;
+    }
+
+    public void WithdrawalButton()
+    {
+        _main.SetActive(false);
+        _transaction.SetActive(true);
+        withdrawal = true;
+    }
+    public void TransferButton()
+    {
+        _main.SetActive(false);
+        _transaction.SetActive(true);
+        transfer = true;
     }
 
     public void Unimplemented()
@@ -33,6 +51,11 @@ public class Main : MonoBehaviour
         _popup.SetActive(false);
     }
 
-
+    public void BooleanInitialize()
+    {
+        deposit = false;
+        withdrawal = false;
+        transfer = false;
+    }
 
 }

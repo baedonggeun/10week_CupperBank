@@ -4,31 +4,40 @@ using UnityEngine;
 using UnityEngine.UI;
 
 
-public class Login : CreatAccoount
+public class Login : MonoBehaviour
 {
     public GameObject _main;
+    public GameObject _login;
+    public GameObject _createAccount;
     public GameObject _popupButton;
     public GameObject _loginErrorPanel;
+    
 
-    public InputField inputLoginID;
-    public InputField inputLoginPW;
+    [SerializeField] private InputField inputLoginID;
+    [SerializeField] private InputField inputLoginPW;
 
 
     public void LoginButton()       //로그인 버튼 클릭 시
     {
-        for(int i = 0; i< inputDataList.Count; i++)
+        string compareIDKey = inputLoginID.text + "_ID";
+        string comparePWKey = inputLoginPW.text;
+
+        if(PlayerPrefs.HasKey(compareIDKey))     //입력된 ID가 레지스트리에 존재한다면(회원가입이 되어 있다면)
         {
-            if(inputLoginID.text == inputDataList[i].inputID.text && 
-                inputLoginPW.text == inputDataList[i].inputPW.text)     //리스트의 ID 와 PW 값과 입력값을 비교하여 같은 경우
+            if (comparePWKey == PlayerPrefs.GetString(inputLoginID.text + "_PW"))        //입력된 PW가 회원가입 시 입력한 PW와 같다면
             {
                 _login.SetActive(false);        //login UI setactive false
                 _main.SetActive(true);      //main UI setactive true
             }
+            else
+            {
+                _loginErrorPanel.SetActive(true);       //login 에러 판넬 setactive true
+            }
         }
-
-        //for문이 끝날 때까지 main 화면으로 넘어가지 않으면 잘못된 값이 입력된 것이므로
-        //login 에러 판넬 setactive true
-        _loginErrorPanel.SetActive(true);       
+        else
+        {
+            _loginErrorPanel.SetActive(true);       //login 에러 판넬 setactive true
+        }
     }
 
     public void ErrorPanelButton()      //error 판넬 버튼 클릭 시 

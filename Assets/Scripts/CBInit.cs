@@ -6,48 +6,21 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
-
-[System.Serializable]
-public class Loading        //로딩 게이지
-{
-    [HideInInspector]
-    public float curLoading = 0f;       //현재 게이지
-    public float maxLoading = 1f;       //최대 게이지
-    public Image uiBar;     //UI Bar 이미지
-    public TextMeshProUGUI loadingText;        //UI Loading Text
-
-    private Coroutine coroutine;
-
-    public float RandAddRate()      //0~0.3f의 임의의 값 생성
-    {
-        float randN = Random.Range(0f, 0.5f);
-
-        return randN;
-    }
-
-    public void LoadingIncrease(float added)        //로딩 게이지 증가값
-    {
-        curLoading += added;
-    }
-
-    public float GetPercentage()        //로딩 비율
-    {
-        return curLoading / maxLoading;
-    }
-}
-
-
 public class CBInit : MonoBehaviour
 {
     public GameObject _CBInitUI;
     public GameObject _CBLoginUI;
 
-    public Loading loading;
+    public CBInitLoading loading;
 
     float time = 0f;
-
     void Update()
     {
+        if(loading == null) 
+        {
+            return;
+        }
+
         time += Time.deltaTime;
 
         if (loading.curLoading < 1f)       //현재 게이지가 1보다 작다면
