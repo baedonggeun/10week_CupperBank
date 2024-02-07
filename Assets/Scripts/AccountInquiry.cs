@@ -44,7 +44,6 @@ public class AccountInquiry : Login
         keyID = base.inputLoginID.text + "_ID";
         details = PlayerPrefs.GetString(keyID);      //details에 keyID를 키로 갖는 값을 덮어씀
         accountData = JsonUtility.FromJson<AccountData>(details);       //details의 json을 accountData 오브젝트로 전환
-        //JsonUtility.FromJsonOverwrite(details, accountData);        //details Json으로 accountData 클래스 덮어씀
 
         //accountData의 값들을 text에 넣어 디스플레이
         nameText.text = accountData.Name;

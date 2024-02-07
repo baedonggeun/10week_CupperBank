@@ -15,7 +15,6 @@ public class Login : MonoBehaviour
     [SerializeField] protected InputField inputLoginID;
     [SerializeField] protected InputField inputLoginPW;
 
-
     public void LoginButton()       //로그인 버튼 클릭 시
     {
         string compareIDKey = inputLoginID.text + "_ID";
@@ -25,6 +24,8 @@ public class Login : MonoBehaviour
         {
             if (comparePWKey == PlayerPrefs.GetString(inputLoginID.text + "_PW"))        //입력된 PW가 회원가입 시 입력한 PW와 같다면
             {
+                save();
+
                 _login.SetActive(false);        //login UI setactive false
                 _main.SetActive(true);      //main UI setactive true
             }
@@ -37,6 +38,11 @@ public class Login : MonoBehaviour
         {
             _loginErrorPanel.SetActive(true);       //login 에러 판넬 setactive true
         }
+    }
+
+    public void save()      //로그인에 사용한 아이디 저장
+    {
+        PlayerPrefs.SetString("logined", inputLoginID.text);
     }
 
     public void ErrorPanelButton()      //error 판넬 버튼 클릭 시 
