@@ -54,7 +54,7 @@ public class EnterInformation : Main
     {
         PanelTextChanger();
 
-        if(base.deposit)        //입금
+        if(Main.deposit)        //입금
         {
             if(CheckIDForCorrect(inputID.text))     //레지스트리에 있는 아이디므로 입금 시작
             {
@@ -85,7 +85,7 @@ public class EnterInformation : Main
                 _failedPanel.SetActive(true);
             }
         }
-        else if (base.withdrawal)
+        else if (Main.withdrawal)
         {
             if (CheckIDForCorrect(inputID.text))     //레지스트리에 있는 아이디므로 출금 시작
             {
@@ -93,7 +93,7 @@ public class EnterInformation : Main
                 int holdingsMoney = int.Parse(transactionData.Holdings);
                 int withdrawalMoney = int.Parse(inputAmountOfMoney.text);
 
-                if (holdingsMoney < withdrawalMoney)        //출금하려는 돈보다 계좌 잔액이 적으면 출금 불가
+                if (alreadyHaveAccountBalance < withdrawalMoney)        //출금하려는 돈보다 계좌 잔액이 적으면 출금 불가
                 {
                     _failedPanel.SetActive(true);
                 }
@@ -116,7 +116,7 @@ public class EnterInformation : Main
                 _failedPanel.SetActive(true);
             }
         }
-        else if(base.transfer)
+        else if(Main.transfer)
         {
 
         }
@@ -128,6 +128,7 @@ public class EnterInformation : Main
     {
         _main.SetActive(true);
         _enterInformation.SetActive(false);
+        _successPanel.SetActive(false);
 
         BooleanInitialize();
     }
@@ -140,23 +141,24 @@ public class EnterInformation : Main
     {
         _main.SetActive(true); 
         _enterInformation.SetActive(false);
+        _failedPanel.SetActive(false);
 
         BooleanInitialize();
     }
 
     public void PanelTextChanger()
     {
-        if (base.deposit)
+        if (Main.deposit)
         {
             successPanelText.text = "Deposit";
             failedPanelText.text = "Deposit";
         }
-        else if(base.withdrawal)
+        else if(Main.withdrawal)
         {
             successPanelText.text = "Withdrawal";
             failedPanelText.text = "Withdrawal";
         }
-        else if(base.transfer)
+        else if(Main.transfer)
         {
             successPanelText.text = "Transfer";
             failedPanelText.text = "Transfer";
@@ -169,11 +171,10 @@ public class EnterInformation : Main
 
         if (PlayerPrefs.HasKey(inputID + "_ID"))        //inputID 레지스트리에 있으면 값을 받아옴
         {
-            checkID = PlayerPrefs.GetString(inputID) + "_ID";
+            checkID = inputID + "_ID";
 
-            keyID = checkID;
-            details = PlayerPrefs.GetString(keyID);      //details에 keyID를 키로 갖는 값을 덮어씀
-            transactionData = JsonUtility.FromJson<TransactionData>(details);       //details의 json을 accountData 오브젝트로 전환
+            details = PlayerPrefs.GetString(checkID);      //details에 checkID를 키로 갖는 값을 덮어씀
+            transactionData = JsonUtility.FromJson<TransactionData>(details);       //details의 json을 transactionData 오브젝트로 전환
 
             return true;
         }

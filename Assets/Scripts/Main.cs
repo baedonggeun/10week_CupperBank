@@ -17,9 +17,9 @@ public class Main : MonoBehaviour
     public GameObject _foreignCurrencyExchange;
     public GameObject _popup;
 
-    protected bool deposit = false;
-    protected bool withdrawal = false;
-    protected bool transfer = false;
+    public static bool deposit = false;
+    public static bool withdrawal = false;
+    public static bool transfer = false;
 
     public void DepositButton()
     {
